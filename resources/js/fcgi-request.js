@@ -10,13 +10,9 @@ $(document).ready(function() {
     const yInput = $(".y-input")
     const rInput = $(".r-input")
 
-    var xIsValid 
-    var yIsValid
-    var rIsValid
-
-    onXChange()
-    onYChange()
-    onRChange()
+    changeValidityClass(xInput, checkXValid())
+    changeValidityClass(yInput, checkYValid())
+    changeValidityClass(rInput, checkRValid())
 
     function checkXValid() {
         let x = xInput.val()
@@ -42,43 +38,20 @@ $(document).ready(function() {
         return true
     }
 
-    xInput.on("input", onXChange)
-    yInput.on("input", onYChange)
-    rInput.on("input", onRChange)
+    xInput.on("input", () => {changeValidityClass(xInput, checkXValid())})
+    yInput.on("input", () => {changeValidityClass(yInput, checkYValid())})
+    rInput.on("input", () => {changeValidityClass(rInput, checkRValid())})
+
+    function changeValidityClass(object, check) {
+        if (check) {
+            object.removeClass(INVALID_CLASS)
+            object.addClass(VALID_CLASS)
+        } else {
+            object.removeClass(VALID_CLASS)
+            object.addClass(INVALID_CLASS)
+        }
+    }
         
-    function onXChange() {
-        xIsValid = checkXValid()
-        if (xIsValid) {
-            xInput.removeClass(INVALID_CLASS)
-            xInput.addClass(VALID_CLASS)
-        } else {
-            xInput.removeClass(VALID_CLASS)
-            xInput.addClass(INVALID_CLASS)
-        }
-    }
-
-    function onYChange() {
-        yIsValid = checkYValid()
-        if (yIsValid) {
-            yInput.removeClass(INVALID_CLASS)
-            yInput.addClass(VALID_CLASS)
-        } else {
-            yInput.removeClass(VALID_CLASS)
-            yInput.addClass(INVALID_CLASS)
-        }
-    }
-
-    function onRChange() {
-        rIsValid = checkRValid()
-        if (rIsValid) {
-            rInput.removeClass(INVALID_CLASS)
-            rInput.addClass(VALID_CLASS)
-        } else {
-            rInput.removeClass(VALID_CLASS)
-            rInput.addClass(INVALID_CLASS)
-        }
-    }
-
     function request(x, y, r) {
         $.ajax({
             url: "/fcgi-bin/app-all.jar",
@@ -104,10 +77,9 @@ $(document).ready(function() {
         return {x: x, y: y, r: r}
     }
 
-
     submitButton.click((e) => {
         e.preventDefault()
-        if (xIsValid && yIsValid && rIsValid) {
+        if (checkXValid && checkYValid && checkRValid) {
             inputs = getInputs()
             request(inputs.x, inputs.y, inputs.r)
         }       
