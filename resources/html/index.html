@@ -1,30 +1,29 @@
 <!DOCTYPE html>
-<html>
+<html data-bs-theme="dark">
     <head>
         <title>Server</title>
-        <link rel="stylesheet" href="css/bootstrap.min.css">
+        <link rel="stylesheet" href="../css/bootstrap.min.css">
         <script>let FF_FOUC_FIX;</script>
     </head>
-    <body>
-        <div class="sticky-top text-center rounded-bottom bg-dark px-3 mb-3 text-light">
-            <h1>Britov Sergey P3216 Web Programming - 367927</h1>
-        </div>
-        <div class="container mt-3 bg-body-secondary rounded">
-            <p id="result"></p>
-            <div class="row align-items-center px-3 py-3">
-                <div class="container my-3 mx-3 bg-light-subtle rounded col">
+    <body class="bg-dark">
+        <h2 class="sticky-top text-start bg-dark-subtle px-2 py-2 text-light mb-0">
+            Britov Sergey P3216 Web Programming - 367927
+        </h2>
+        <div class="container height-full rounded-bottom border-white border-start border-end">
+            <div class="row align-items-center px-3 py-0">
+                <div class=" border-white rounded col">
                     <form id="user-input text-center">
                         <div class="form-floating my-3">
                             <input class="x-input form-control" type="text" id="floatingXInput" value="0">
                             <label for="floatingXInput">X coordinate</label>
                             <div class="invalid-feedback"> X &straightepsilon; [-3.0, 5.0] with up to 15 digits after decimal</div>
                         </div>
-                        <div class="form-floating my-3 border">
+                        <div class="form-floating my-3">
                             <input class="y-input form-control" type="text" id="floatingYInput" value="0">
                             <label for="floatingYInput">Y coordinate</lable>
                             <div class="invalid-feedback"> Y &straightepsilon; [-5.0, 3.0] with up to 15 digits after decimal</div>
                         </div>
-                        <div class="form-floating my-3 border">
+                        <div class="form-floating my-3">
                             <select class="form-select r-input" id="floatingRSelect">
                                 <option value="1.0">1.0</option>
                                 <option value="1.5">1.5</option>
@@ -35,32 +34,39 @@
                             <label for="floatingRSelect">R value</label>
                             <div class="invalid-feedback"> R is somehow invalid </div>
                         </div>
-                        <div class="text-center">
+                        <div class="text-center my-3">
                             <input type="submit" id="submit" class="my-1 btn btn-outline-primary center-block" value="Submit"/>
                         </div>
                     </form>
                 </div>
-                <div class="col text-center">
-                    <img src="images/area.png" class="rounded" alt="area.png" width="300px" height="300px">
+                <div class="mx-3 my-3 col text-center rounded">
+                    <img src="../images/area.png" class="rounded" alt="area.png" width="300px" height="300px">
                 </div>
             </div>
-            <div class="row">
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th scope="col">Result</th>
-                            <th scope="col">Execution Time</th>
-                            <th scope="col">Current Time</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <!--Results-->
-                    </tbody>
-                </table>
+            <div class="row text-center px-3">
+                <div class="col">
+                    <h2>Results:</h2>
+                </div>
+            </div>
+            <div class="row px-3">
+                <div class="col">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Result</th>
+                                <th scope="col">Execution Time</th>
+                                <th scope="col">Current Time</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!--Results-->
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
-        <script type="text/javascript" src="js/bootstrap.min.js"></script>
-        <script type="text/javascript" src="js/jQuery.js"></script>
-        <script type="text/javascript" src="js/fcgi-request.js"></script>
+        <script type="text/javascript" src="../js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="../js/jQuery.js"></script>
+        <script type="text/javascript" src="../js/fcgi-request.js"></script>
     </body>
 </html> 
