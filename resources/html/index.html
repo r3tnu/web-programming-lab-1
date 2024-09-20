@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Server</title>
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+        <script>let FF_FOUC_FIX;</script>
+    </head>
+    <body>
+        <div class="sticky-top text-center rounded-bottom bg-dark px-3 mb-3 text-light">
+            <h1>Britov Sergey P3216 Web Programming - 367927</h1>
+        </div>
+        <div class="container mt-3 bg-body-secondary rounded">
+            <p id="result"></p>
+            <div class="row align-items-center px-3 py-3">
+                <div class="container my-3 mx-3 bg-light-subtle rounded col">
+                    <form id="user-input text-center">
+                        <div class="form-floating my-3">
+                            <input class="x-input form-control" type="text" id="floatingXInput" value="0">
+                            <label for="floatingXInput">X coordinate</label>
+                            <div class="invalid-feedback"> X &straightepsilon; [-3.0, 5.0] with up to 15 digits after decimal</div>
+                        </div>
+                        <div class="form-floating my-3 border">
+                            <input class="y-input form-control" type="text" id="floatingYInput" value="0">
+                            <label for="floatingYInput">Y coordinate</lable>
+                            <div class="invalid-feedback"> Y &straightepsilon; [-5.0, 3.0] with up to 15 digits after decimal</div>
+                        </div>
+                        <div class="form-floating my-3 border">
+                            <select class="form-select r-input" id="floatingRSelect">
+                                <option value="1.0">1.0</option>
+                                <option value="1.5">1.5</option>
+                                <option value="2.0">2.0</option>
+                                <option value="2.5">2.5</option>
+                                <option value="3.0">3.0</option>
+                            </select>
+                            <label for="floatingRSelect">R value</label>
+                            <div class="invalid-feedback"> R is somehow invalid </div>
+                        </div>
+                        <div class="text-center">
+                            <input type="submit" id="submit" class="my-1 btn btn-outline-primary center-block" value="Submit"/>
+                        </div>
+                    </form>
+                </div>
+                <div class="col text-center">
+                    <img src="images/area.png" class="rounded" alt="area.png" width="300px" height="300px">
+                </div>
+            </div>
+            <div class="row">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Result</th>
+                            <th scope="col">Execution Time</th>
+                            <th scope="col">Current Time</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!--Results-->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <script type="text/javascript" src="js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="js/jQuery.js"></script>
+        <script type="text/javascript" src="js/fcgi-request.js"></script>
+    </body>
+</html> 
