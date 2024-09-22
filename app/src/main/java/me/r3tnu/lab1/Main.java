@@ -51,7 +51,10 @@ public class Main {
 
                 String json = Json.createObjectBuilder()
                     .add("result", result)
-                    .add("execution_time", String.valueOf(executionTime.getSeconds()) + "." + String.valueOf(executionTime.getNano()))
+                    .add("x", point.getX())
+                    .add("y", point.getY())
+                    .add("r", point.getR())
+                    .add("executionTime", String.valueOf(executionTime.getNano()))
                     .build()
                     .toString();
                 

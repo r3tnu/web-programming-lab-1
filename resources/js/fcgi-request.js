@@ -5,14 +5,29 @@ $(document).ready(function() {
     const NUMBER_REGEX = /^(\-)?[0-9]+(\.[0-9]{1,15})?$/
 
     const submitButton = $("#submit")
+    const clearButton = $("#clear-results")
+    const resultsTableBody = $("#results-body")
 
-    const xInput = $(".x-input")
-    const yInput = $(".y-input")
-    const rInput = $(".r-input")
+    const xInput = $("#x-input")
+    const yInput = $("#y-input")
+    const rInput = $("#r-input")
 
     changeValidityClass(xInput, checkXValid())
     changeValidityClass(yInput, checkYValid())
     changeValidityClass(rInput, checkRValid())
+
+    if (!localStorage.getItem("results")) {
+        localStorage.setItem("results", "")
+    } else {
+        populateTableWithLocalStorage()
+    }
+
+    function populateTableWithLocalStorage() {
+        const results = localStorage.getItem("results").split("&")
+        for (const result of results) {
+            addToTable(JSON.parse(result))
+        }
+    }
 
     function checkXValid() {
         let x = xInput.val()
@@ -56,7 +71,7 @@ $(document).ready(function() {
         $.ajax({
             url: "/fcgi-bin/app-all.jar",
             type: "GET",
-            dataType: "text",
+            dataType: "json",
             data: {
                 r: r,
                 x: x,
@@ -66,8 +81,24 @@ $(document).ready(function() {
         })
     }
 
-    function addResults(result) {
-        $("#result").html(result)
+    function addResults(json) {
+        json.currentTime = new Date().toLocaleString()
+        const results = localStorage.getItem("results")
+        localStorage.setItem("results", results + (results ? "&" : "")+ JSON.stringify(json))
+        addToTable(json)
+    }
+
+    function addToTable(json) {
+        const tableItem = $("<tr></tr>")
+            .append($("<td></td>").text(json.result ? "Hit" : "Miss"))
+            .append($("<td></td>").text(json.x))
+            .append($("<td></td>").text(json.y))
+            .append($("<td></td>").text(json.r))
+            .append($("<td></td>").text(json.executionTime))
+            .append($("<td></td>").text(json.currentTime))
+
+        resultsTableBody.append(tableItem)
+
     }
 
     function getInputs() {
@@ -76,6 +107,11 @@ $(document).ready(function() {
         r = parseFloat(rInput.val())
         return {x: x, y: y, r: r}
     }
+
+    clearButton.click((e) => {
+        localStorage.setItem("results", "")
+        resultsTableBody.html("")
+    })
 
     submitButton.click((e) => {
         e.preventDefault()
