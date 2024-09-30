@@ -82,20 +82,37 @@ $(document).ready(function() {
     }
 
     function addResults(json) {
-        json.currentTime = new Date().toLocaleString()
+        json.currentTime = Date.now()
         const results = localStorage.getItem("results")
         localStorage.setItem("results", results + (results ? "&" : "")+ JSON.stringify(json))
         addToTable(json)
     }
 
+    function convertFromEpochToCurrentTimezone(epochTime) {
+        const options = {
+            timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+            year: "numeric",
+            month: "long",
+            day: "numeric",
+            hour: "2-digit",
+            minute: "2-digit",
+            second: "2-digit",
+            timeZoneName: "short"
+        }
+        const dateObject = new Date(epochTime)
+
+        return dateObject.toLocaleString("en-US", options)
+    }
+
     function addToTable(json) {
+
         const tableItem = $("<tr></tr>")
             .append($("<td></td>").text(json.result ? "Hit" : "Miss"))
             .append($("<td></td>").text(json.x))
             .append($("<td></td>").text(json.y))
             .append($("<td></td>").text(json.r))
             .append($("<td></td>").text(json.executionTime))
-            .append($("<td></td>").text(json.currentTime))
+            .append($("<td></td>").text(convertFromEpochToCurrentTimezone(json.currentTime)))
 
         resultsTableBody.append(tableItem)
 
@@ -115,7 +132,7 @@ $(document).ready(function() {
 
     submitButton.click((e) => {
         e.preventDefault()
-        if (checkXValid && checkYValid && checkRValid) {
+        if (checkXValid() && checkYValid() && checkRValid()) {
             inputs = getInputs()
             request(inputs.x, inputs.y, inputs.r)
         }       
